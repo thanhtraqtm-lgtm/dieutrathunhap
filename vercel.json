@@ -1,4 +1,15 @@
 {
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/[...path].js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "crons": [
     {
       "path": "/api/drive/cron-backup",
