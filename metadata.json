@@ -1,0 +1,6 @@
+{
+  "name": "Hệ Thống Điều Hành & Điều Tra Thống Kê Cơ Sở",
+  "description": "Hệ thống quản lý điều tra viên, phân quyền địa bàn, chọn mẫu ngẫu nhiên hệ thống từ bảng kê hộ, theo dõi tiến độ mã TKCS, phát hiện Fake IP và tự động cấu trúc thư mục đồng bộ Google Drive.",
+  "requestFramePermissions": ["geolocation", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

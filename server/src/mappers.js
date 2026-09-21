@@ -1,0 +1,30 @@
+// Dùng chung giữa các route (listings, sampling) để tránh lệch field khi 1 nơi sửa mà nơi kia quên sửa theo.
+export function rowToListing(r) {
+  return {
+    id: r.id,
+    stt: r.stt,
+    provinceCode: r.province_code || '',
+    provinceName: r.province_name || '',
+    districtCode: r.district_code || '',
+    districtName: r.district_name || '',
+    communeCode: r.commune_code || '',
+    communeName: r.commune_name || '',
+    areaCode: r.area_code || '',
+    tkcsCode: r.tkcs_code || '',
+    householdName: r.household_name || '',
+    ownerName: r.owner_name || '',
+    address: r.address || '',
+    industryCode: r.industry_code || '',
+    industryName: r.industry_name || '',
+    phone: r.phone || '',
+    estimatedRevenue: r.estimated_revenue ?? undefined,
+    workerCount: r.worker_count ?? undefined,
+    notes: r.notes || '',
+    memberCount: r.member_count ?? undefined,
+    mainIncomeSourceCode: r.main_income_source_code ?? undefined,
+    urbanRural: r.urban_rural || '',
+    reviewerName: r.reviewer_name || '',
+    reviewerPhone: r.reviewer_phone || '',
+    surveyListingType: r.survey_listing_type || undefined,
+  };
+}
