@@ -1,10 +1,11 @@
+process.env.TZ = 'Asia/Ho_Chi_Minh';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 // QUAN TRỌNG: khi triển khai thật, đặt biến môi trường JWT_SECRET riêng, dài, ngẫu nhiên
 // (VD: chạy `openssl rand -hex 32`) — KHÔNG dùng giá trị mặc định này ở môi trường thật.
 const JWT_SECRET = process.env.JWT_SECRET || 'CHANGE_ME_DEV_ONLY_INSECURE_SECRET';
-const TOKEN_EXPIRY = '12h'; // ĐTV cần đăng nhập lại sau 12 giờ để đảm bảo an toàn
+const TOKEN_EXPIRY = '30d'; // ĐTV cần đăng nhập lại sau 12 giờ để đảm bảo an toàn
 
 export function hashPassword(plainPassword) {
   return bcrypt.hashSync(plainPassword, 10);
