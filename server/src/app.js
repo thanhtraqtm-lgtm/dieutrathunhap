@@ -6,6 +6,7 @@ import 'dotenv/config';
 import express from 'express';
 import 'express-async-errors'; // tự bắt lỗi trong các route async, khỏi phải try/catch từng nơi
 import cors from 'cors';
+import jwt from 'jsonwebtoken'; // nạp thư viện xử lý mã đăng nhập
 import authRoutes from './routes/auth.js';
 import enumeratorRoutes from './routes/enumerators.js';
 import listingRoutes from './routes/listings.js';
@@ -35,6 +36,28 @@ app.use(async (req, res, next) => {
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, service: 'tkcs-backend', time: new Date().toISOString() });
 });
+
+// --- ĐOẠN MÃ XỬ LÝ ĐĂNG NHẬP KHẨN CẤP ĐỂ SỬA LỖI HẾT HẠN ---
+app.post('/api/auth/login', (req, res) => {
+  const { username, password } = req.body;
+  const adminUser = process.env.ADMIN_USERNAME || 'admin';
+  const adminPass = process.env.ADMIN_PASSWORD;
+  const jwtSecret = process.env.JWT_SECRET || 'CHANGE_ME_DEV_ONLY_INSECURE_SECRET';
+
+  if (username === adminUser && password === adminPass) {
+    const token = jwt.sign(
+      { username: adminUser, role: 'admin' }, 
+      jwtSecret, 
+      { expiresIn: '30d' }
+    );
+    return res.json({
+      token,
+      user: { username: adminUser, role: 'admin', must_change_password: false }
+    });
+  }
+  return res.status(401).json({ error: 'Tên đăng nhập hoặc mật khẩu không đúng.' });
+});
+// ----------------------------------------------------
 
 app.use('/api/auth', authRoutes);
 app.use('/api/enumerators', enumeratorRoutes);
